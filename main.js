@@ -1,10 +1,10 @@
 let TIMER = {
-    tomatoTime: 25,
+    tomatoTime: 1,
     shortBreakTime: 5,
     longBreakTime: 15,
     timesToLongBreak: 4,
     tomatoCount: 0,
-    currentMinutes: 25,
+    currentMinutes: 1,
     currentSeconds: 60,
     currentStatus: {
         paused: true,
@@ -41,12 +41,14 @@ let TIMER = {
         if (TIMER.currentSeconds === 60) TIMER.currentMinutes--;
         TIMER.currentSeconds--;
         if (TIMER.currentSeconds < 0) {
-            TIMER.currentMinutes--;
-            if (TIMER.currentMinutes < 0) {
+            if (TIMER.currentMinutes === 0) {
                 TIMER.nextStatus();
                 TIMER.start();
                 return;
             }
+            TIMER.currentSeconds = 60;
+            TIMER.start();
+            return;            
         }
         minutesNode.textContent = TIMER.currentMinutes.toString().padStart(2, '0');
         secondsNode.textContent = TIMER.currentSeconds.toString().padStart(2, '0');
