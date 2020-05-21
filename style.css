@@ -30,7 +30,9 @@ body {
 .timer__toggle-status, .timer__next-status {
     cursor: pointer;
     background-color: transparent;
+    outline: none;
     border: 2px solid #333333;
+    color: #333333;
     padding: 10px 15px;
     width: 150px;
     transition: all .3s ease;
@@ -38,4 +40,7 @@ body {
 .timer__toggle-status:hover, .timer__next-status:hover {
     background-color: #333333;
     color: #fafafa;
+}
+.timer__toggle-status:active, .timer__next-status:active {
+    transform: scale(0.9);
 }
