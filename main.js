@@ -65,17 +65,56 @@ let TIMER = {
     }
 }
 
+function syncSettings (reset = false) {
+    if (inputTomato.value) {
+        TIMER.tomatoTime = inputTomato.value;
+    } else inputTomato.value = TIMER.tomatoTime;
+    if (inputShortBreak.value) {
+        TIMER.shortBreakTime = inputShortBreak.value;
+    } else inputShortBreak.value = TIMER.shortBreakTime;
+    if (inputLongBreak.value) {
+        TIMER.longBreakTime = inputLongBreak.value;
+    } else inputLongBreak.value = TIMER.longBreakTime;
+    if (inputTimes.value) {
+        TIMER.timesToLongBreak = inputTimes.value;
+    } else inputTimes.value = TIMER.timesToLongBreak;
+
+    if (reset) {
+        TIMER.currentStatus.tomato = true;
+        TIMER.currentStatus.paused = true;
+        TIMER.updateTime(TIMER.tomatoTime);
+        resetNodesValues();
+    }
+
+    settingsNode.classList.add('hidden');
+}
+
+function resetNodesValues() {
+    minutesNode.textContent = TIMER.tomatoTime.toString().padStart(2, '0');
+    secondsNode.textContent = '00';
+    toggleStatusButton.textContent = 'Start';
+    document.title = 'Timer';
+}
+
 const toggleStatusButton = document.querySelector('.timer__toggle-status');
-const skipStatusButton = document.querySelector('.timer__next-status')
+const skipStatusButton = document.querySelector('.timer__next-status');
+const settingsButton = document.querySelector('.timer-settings__icon');
 const minutesNode = document.querySelector('.timer__minutes');
 const secondsNode = document.querySelector('.timer__seconds');
+const settingsNode = document.querySelector('.timer-settings__container');
+const inputTomato = document.querySelector('.input-tomato');
+const inputShortBreak = document.querySelector('.input-short-break');
+const inputLongBreak = document.querySelector('.input-long-break');
+const inputTimes = document.querySelector('.input-times');
 
 const workAudio = new Audio('./sounds/work.mp3');
 const relaxAudio = new Audio('./sounds/relax.mp3');
+workAudio.volume = 0.3;
+relaxAudio.volume = 0.3;
 
 document.addEventListener('DOMContentLoaded', function() {
-    minutesNode.textContent = TIMER.tomatoTime.toString().padStart(2, '0');
-    secondsNode.textContent = '00';
+    resetNodesValues();
+    syncSettings();
 });
 
 let timerID, titleStatus;
@@ -95,3 +134,14 @@ toggleStatusButton.addEventListener('click', () => {
 skipStatusButton.addEventListener('click', () => {
     TIMER.nextStatus();
 });
+
+settingsButton.addEventListener('click', () => {
+    settingsNode.classList.toggle('hidden');
+});
+
+settingsNode.addEventListener('keyup', (e) => {
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        syncSettings(true);
+    }
+})
