@@ -51,7 +51,7 @@ body {
     bottom: 20px;
     left: 20px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 .timer-settings__icon {
     width: 42px;
@@ -70,10 +70,10 @@ body {
     opacity: 0.8;
 }
 .timer-settings__container {
-    width: 600px;
-    max-width: calc(100%-82px);
-    margin-left: 20px;
+    margin-bottom: 20px;
+    width: 300px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     visibility: visible;
@@ -81,8 +81,9 @@ body {
     transition: all .3s ease;
 }
 .setting {
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
 }
 .setting label {

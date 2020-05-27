@@ -15,31 +15,35 @@
                 <span class="timer__seconds"></span>
             </div>
             <div class="timer__buttons">
-                <button class="timer__toggle-status">Start</button>
-                <button class="timer__next-status">Skip</button>
+                <button class="timer__toggle-status" tabindex="1">Start</button>
+                <button class="timer__next-status" tabindex="2">Skip</button>
             </div>
         </div>
         <div class="timer-settings">
-            <img src="./icons/settings.svg" class="timer-settings__icon">
             <div class="timer-settings__container hidden">
                 <div class="setting">
                     <label for="input-tomato">work (min)</label>
-                    <input type="number" name="tomato" id="input-tomato" class="input-tomato" min="1" max="60">
+                    <input type="number" tabindex="3" name="tomato" id="input-tomato" class="input-tomato" min="1" max="60">
                 </div>
                 <div class="setting">
                     <label for="input-short-break">short break (min)</label>
-                    <input type="number" name="shortBreak" id="input-short-break" class="input-short-break" min="1" max="60">
+                    <input type="number" tabindex="4" name="shortBreak" id="input-short-break" class="input-short-break" min="1" max="60">
                 </div>
                 <div class="setting">
                     <label for="input-long-break">long break (min)</label>
-                    <input type="number" name="longBreak" id="input-long-break" class="input-long-break" min="1" max="60">
+                    <input type="number" tabindex="5" name="longBreak" id="input-long-break" class="input-long-break" min="1" max="60">
                 </div>
                 <div class="setting">
                     <label for="input-times">long break after (works)</label>
-                    <input type="number" name="times" id="input-times" class="input-times" min="1" max="10">
+                    <input type="number" tabindex="6" name="times" id="input-times" class="input-times" min="1" max="10">
                 </div>
-                <img src="./icons/enter.svg" onclick="syncSettings(true)" class="timer-settings__submit-icon">
+                <div class="setting">
+                    <label for="input-volume">volume</label>
+                    <input type="range" tabindex="7" name="volume" id="input-volume" class="input-volume" value="0.5" min="0" max="1" step="0.1">
+                </div>
+                <img src="./icons/enter.svg" tabindex="8" onclick="syncSettings(true)" class="timer-settings__submit-icon">
             </div>
+            <img src="./icons/settings.svg" class="timer-settings__icon">
         </div>
     </div>
     <script src="main.js"></script>

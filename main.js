@@ -78,11 +78,15 @@ function syncSettings (reset = false) {
     if (inputTimes.value) {
         TIMER.timesToLongBreak = inputTimes.value;
     } else inputTimes.value = TIMER.timesToLongBreak;
+    if (inputVolume) {
+        workAudio.volume = relaxAudio.volume = inputVolume.value;
+    }
 
     if (reset) {
         TIMER.currentStatus.tomato = true;
         TIMER.currentStatus.paused = true;
         TIMER.updateTime(TIMER.tomatoTime);
+        TIMER.tomatoCount = 0;
         resetNodesValues();
     }
 
@@ -106,11 +110,12 @@ const inputTomato = document.querySelector('.input-tomato');
 const inputShortBreak = document.querySelector('.input-short-break');
 const inputLongBreak = document.querySelector('.input-long-break');
 const inputTimes = document.querySelector('.input-times');
+const inputVolume = document.querySelector('.input-volume');
 
 const workAudio = new Audio('./sounds/work.mp3');
 const relaxAudio = new Audio('./sounds/relax.mp3');
-workAudio.volume = 0.3;
-relaxAudio.volume = 0.3;
+workAudio.volume = 0.5;
+relaxAudio.volume = 0.5;
 
 document.addEventListener('DOMContentLoaded', function() {
     resetNodesValues();
@@ -133,6 +138,8 @@ toggleStatusButton.addEventListener('click', () => {
 
 skipStatusButton.addEventListener('click', () => {
     TIMER.nextStatus();
+    TIMER.currentStatus.paused = true;
+    resetNodesValues();
 });
 
 settingsButton.addEventListener('click', () => {
